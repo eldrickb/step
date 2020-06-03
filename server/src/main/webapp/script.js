@@ -12,17 +12,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
+ const getServerContent = (url) => {
+     return fetch(url)
+        .then((res) => res.json())
+        .catch(console.err)
+ }
 
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+ const addCommentsToDom = () => {
 
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
+     // create DOM node for an individual comment
+     const newCommentElement = (author, content) => {
+        let wrapper = document.createElement("div")
+        wrapper.classList.add("comment")
+
+        let authorNode = document.createElement("h6")
+        authorNode.innerHTML = document.createTextNode(author)
+
+        let contentNode = document.createElement("p")
+        contentNode = document.createTextNode(content)
+
+        wrapper.appendChild(authorNode)
+        wrapper.appendChild(contentNode)
+     }
+
+    // create DOM nodes for each comment
+     const parseComments = (json) => {
+
+         let wrapper = document.createElement("div");
+        
+         json.forEach(comment => {
+            wrapper.appendChild(newCommentElement(comment.author, comment.content))
+        })
+
+        return wrapper;
+     }
+
+     getServerContent("/comments")
+        .then(parseComments)
+        .then(data => addToDom(data))
+ } 
+
+ const addToDom = (text) => {
+     document.getElementById("server-content").appendChild(text)
+ }
