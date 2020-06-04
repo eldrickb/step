@@ -12,48 +12,48 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
- const getServerContent = (url) => {
-     return fetch(url)
-        .then((res) => res.json())
-        .catch(console.err)
- }
+const getServerContent = (url) => {
+    return fetch(url)
+    .then((res) => res.json())
+    .catch(console.err)
+}
 
- const addCommentsToDom = () => {
+const addCommentsToDom = () => {
 
-     // create DOM node for an individual comment
-     const newCommentElement = (author, content) => {
-        let wrapper = document.createElement("div")
-        wrapper.classList.add("comment")
+    // create DOM node for an individual comment
+    const newCommentElement = (author, content) => {
+    const wrapper = document.createElement("div")
+    wrapper.classList.add("comment")
 
-        let authorNode = document.createElement("h6")
-        authorNode.appendChild(document.createTextNode(author))
+    const authorNode = document.createElement("h6")
+    authorNode.appendChild(document.createTextNode(author))
 
-        let contentNode = document.createElement("p")
-        contentNode.appendChild(document.createTextNode(content))
+    const contentNode = document.createElement("p")
+    contentNode.appendChild(document.createTextNode(content))
 
-        wrapper.appendChild(authorNode)
-        wrapper.appendChild(contentNode)
+    wrapper.appendChild(authorNode)
+    wrapper.appendChild(contentNode)
 
-        return wrapper
-     }
+    return wrapper
+    }
 
     // create DOM nodes for each comment
-     const parseComments = (json) => {
+    const parseComments = (json) => {
 
-         let wrapper = document.createElement("div");
-        
-         json.forEach(comment => {
-            wrapper.appendChild(newCommentElement(comment.author, comment.content))
-        })
+        let wrapper = document.createElement("div");
+    
+        json.forEach(comment => {
+        wrapper.appendChild(newCommentElement(comment.author, comment.content))
+    })
 
-        return wrapper;
-     }
+    return wrapper;
+    }
 
-     getServerContent("/comments")
-        .then(parseComments)
-        .then(data => addToDom(data))
- } 
+    getServerContent("/comments")
+    .then(parseComments)
+    .then(addToDom)
+} 
 
- const addToDom = (text) => {
-     document.getElementById("server-content").appendChild(text)
- }
+const addToDom = (text) => {
+    document.getElementById("server-content").appendChild(text)
+}

@@ -9,13 +9,12 @@
   <body>
     <div id="content">
         
-      <h1>Comment</h1>
+        <h1>Comments</h1>
 
-        <form action="/comments" method="POST">
-
-        <input type="text" name="comment-author" placeholder ="Author"/>
-        <textarea name="comment-content" placeholder="Comment"></textarea>
-        <input type="submit" />
+        <form action="/comments" method="POST" id="comments-form">
+            <input type="text" name="comment-author" placeholder ="Author"/>
+            <textarea name="comment-content" placeholder="Comment"></textarea>
+            <button type="submit">Submit</button>
         </form>
 
         <div>
