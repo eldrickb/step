@@ -43,10 +43,10 @@ const addCommentsToDom = () => {
         let wrapper = document.createElement("div");
     
         json.forEach(comment => {
-        wrapper.appendChild(newCommentElement(comment.author, comment.content))
-    })
+            wrapper.appendChild(newCommentElement(comment.author, comment.content))
+        })
 
-    return wrapper;
+        return wrapper;
     }
 
     getServerContent("/comments")
