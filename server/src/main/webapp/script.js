@@ -14,27 +14,27 @@
 
 const getServerContent = (url) => {
     return fetch(url)
-    .then((res) => res.json())
-    .catch(console.err)
+        .then((res) => res.json())
+        .catch(console.err)
 }
 
 const addCommentsToDom = () => {
 
     // create DOM node for an individual comment
     const newCommentElement = (author, content) => {
-    const wrapper = document.createElement("div")
-    wrapper.classList.add("comment")
+        const wrapper = document.createElement("div")
+        wrapper.classList.add("comment")
 
-    const authorNode = document.createElement("h6")
-    authorNode.appendChild(document.createTextNode(author))
+        const authorNode = document.createElement("h6")
+        authorNode.appendChild(document.createTextNode(author))
 
-    const contentNode = document.createElement("p")
-    contentNode.appendChild(document.createTextNode(content))
+        const contentNode = document.createElement("p")
+        contentNode.appendChild(document.createTextNode(content))
 
-    wrapper.appendChild(authorNode)
-    wrapper.appendChild(contentNode)
+        wrapper.appendChild(authorNode)
+        wrapper.appendChild(contentNode)
 
-    return wrapper
+        return wrapper
     }
 
     // create DOM nodes for each comment
@@ -50,8 +50,8 @@ const addCommentsToDom = () => {
     }
 
     getServerContent("/comments")
-    .then(parseComments)
-    .then(addToDom)
+        .then(parseComments)
+        .then(addToDom)
 } 
 
 const addToDom = (text) => {
