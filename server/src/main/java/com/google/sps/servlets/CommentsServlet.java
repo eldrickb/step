@@ -34,15 +34,13 @@ import com.google.gson.Gson;
 @WebServlet("/comments")
 public class CommentsServlet extends HttpServlet {
 
-
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Gson gson = new Gson();
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
-
+        Query query = new Query("Comment");
         PreparedQuery results = datastore.prepare(query);
 
         LinkedList<Comment> comments = new LinkedList<>();
@@ -75,9 +73,8 @@ public class CommentsServlet extends HttpServlet {
         datastore.put(commentEntity);
 
         response.getWriter().println(gson.toJson(commentEntity));
-
+        
     }
-
 
     /**
     * @return the request parameter, or the default value if the parameter

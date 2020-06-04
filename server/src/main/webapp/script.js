@@ -26,13 +26,15 @@
         wrapper.classList.add("comment")
 
         let authorNode = document.createElement("h6")
-        authorNode.innerHTML = document.createTextNode(author)
+        authorNode.appendChild(document.createTextNode(author))
 
         let contentNode = document.createElement("p")
-        contentNode = document.createTextNode(content)
+        contentNode.appendChild(document.createTextNode(content))
 
         wrapper.appendChild(authorNode)
         wrapper.appendChild(contentNode)
+
+        return wrapper
      }
 
     // create DOM nodes for each comment
