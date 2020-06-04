@@ -48,7 +48,14 @@ public class CommentsServlet extends HttpServlet {
 
         LinkedList<Comment> comments = new LinkedList<>();
 
+        // check if # of comments are set
+        int queryCount = Integer.parseInt(getParameter(request, "query-count", "-1"));
+
         for (Entity entity : results.asIterable()) {
+
+            if (queryCount == 0)
+                break;
+                
             Comment newComment = new CommentBuilder()
                 .setId(entity.getKey().getId())
                 .setAuthor((String) entity.getProperty("author"))
@@ -56,6 +63,9 @@ public class CommentsServlet extends HttpServlet {
                 .build();
             
             comments.add(newComment);
+
+            if (queryCount > 0)
+                queryCount--;
         }
 
         response.setContentType("application/json");

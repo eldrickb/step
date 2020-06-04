@@ -49,11 +49,30 @@ const addCommentsToDom = () => {
         return wrapper;
     }
 
-    getServerContent("/comments")
+    // query string
+    const fetchQuery = () => {
+        let queryString = "?"
+
+        // query count
+        const queryCountElem = document.getElementById("query-count");
+        const queryCountValue = queryCountElem.options[queryCountElem.selectedIndex].value;
+
+        queryString+=`query-count=${queryCountValue}`
+
+        return getServerContent(`/comments${queryString}`)
+    }
+
+
+    fetchQuery()
         .then(parseComments)
         .then(addToDom)
 } 
 
 const addToDom = (text) => {
-    document.getElementById("server-content").appendChild(text)
+
+    const serverContent = document.getElementById("server-content")
+    
+    serverContent.innerHTML = null
+    serverContent.appendChild(text)
+
 }

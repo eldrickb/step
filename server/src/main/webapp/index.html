@@ -14,11 +14,19 @@
         <form action="/comments" method="POST" id="comments-form">
             <input type="text" name="comment-author" placeholder ="Author"/>
             <textarea name="comment-content" placeholder="Comment"></textarea>
+
             <button type="submit">Submit</button>
         </form>
 
         <div>
             <h3>See Comments</h3>
+
+            <h4>How many?</h4>
+            <select id="query-count">
+                <option value="-1">all</option>
+                <option value="2">2</option>
+            </select>
+
             <button onclick="addCommentsToDom()">Get Comments</button>
             <div id="server-content"></div>
         </div>
