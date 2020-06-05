@@ -8,11 +8,20 @@
   </head>
   <body>
     <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+        
+        <h1>Comments</h1>
+
+        <form action="/comments" method="POST" id="comments-form">
+            <input type="text" name="comment-author" placeholder ="Author"/>
+            <textarea name="comment-content" placeholder="Comment"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+
+        <div>
+            <h3>See Comments</h3>
+            <button onclick="addCommentsToDom()">Get Comments</button>
+            <div id="server-content"></div>
+        </div>
     </div>
   </body>
 </html>
