@@ -1,32 +1,12 @@
-# Webpack Frontend Starterkit
+# Portfolio
 
-[![Dependabot badge](https://flat.badgen.net/dependabot/wbkd/webpack-starter?icon=dependabot)](https://dependabot.com/)
+STEP 2020 Portfolio project.
 
-A lightweight foundation for your next webpack based frontend project.
+## Stack
+Maven backend, NPM frontend
 
-
-### Installation
-
+### Running
+```bash
+$ mvn package appengine:run
 ```
-npm install
-```
-
-### Start Dev Server
-
-```
-npm start
-```
-
-### Build Prod Version
-
-```
-npm run build
-```
-
-### Features:
-
-* ES6 Support via [babel](https://babeljs.io/) (v7)
-* SASS Support via [sass-loader](https://github.com/jtangelder/sass-loader)
-* Linting via [eslint-loader](https://github.com/MoOx/eslint-loader)
-
-When you run `npm run build` we use the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to move the css to a separate file. The css file gets included in the head of the `index.html`.
+Having node and NPM installed on your system is not required. Node and NPM are bundled into `target/` by the plugin.
