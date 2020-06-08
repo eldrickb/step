@@ -62,7 +62,6 @@ const addCommentsToDom = () => {
         return getServerContent(`/comments${queryString}`)
     }
 
-
     fetchQuery()
         .then(parseComments)
         .then(addToDom)

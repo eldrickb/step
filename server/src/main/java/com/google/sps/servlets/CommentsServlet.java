@@ -20,6 +20,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.sps.data.Comment;
 import com.google.sps.data.CommentBuilder;
 import java.io.IOException;
@@ -53,6 +56,8 @@ public class CommentsServlet extends HttpServlet {
 
         for (Entity entity : results.asIterable()) {
 
+            System.out.println(gson.toJson(entity))
+
             if (queryCount == 0)
                 break;
                 
@@ -85,6 +90,22 @@ public class CommentsServlet extends HttpServlet {
         datastore.put(commentEntity);
 
         response.getWriter().println(gson.toJson(commentEntity));
+    }
+
+    @Override
+    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String commentId = getParameter(request, "comment-id", "");
+
+        Filter keyFilter = new FilterPredicate("id", FilterOperator.EQUAL, commentId); 
+
+        Entity comment = datastore.prepare(new Query("Comment").setFilter(keyFilter)).asSingleEntity();
+
+        if (comment != null)
+            datastore.delete(comment.getKey());
+
+        response.setStatus(200);
+        response.getWriter().println("Success");
     }
 
     /**
