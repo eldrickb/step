@@ -12,11 +12,45 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+// general utils
+
 const getServerContent = (url) => {
     return fetch(url)
         .then((res) => res.json())
         .catch(console.err)
 }
+
+const contentManagementClosure = (id) => {
+
+    // is a function until i learn how to await window.onLoad
+    const getElem = () => document.getElementById(id)
+    
+    const clearContent = () => {
+        getElem().innerHTML = null
+    }
+
+    const appendContent = content => {
+
+        if(typeof content === "string")
+            content = document.createTextNode(content)
+
+        getElem().appendChild(content)
+    }
+
+    const setContent = content => {
+        clearContent()
+        appendContent(content)
+    }
+
+    return {
+        clearContent,
+        appendContent,
+        setContent
+    }
+}
+
+// direct functions
 
 const addCommentsToDom = () => {
 
@@ -67,11 +101,70 @@ const addCommentsToDom = () => {
         .then(addToDom)
 } 
 
-const addToDom = (text) => {
-
-    const serverContent = document.getElementById("server-content")
-    
-    serverContent.innerHTML = null
-    serverContent.appendChild(text)
-
+const deleteAllComments = () => {
+    fetch("/comment/delete-all", {
+        method: "POST"
+    })
+        .then(() => {
+            clearServerContent()
+            appendServerContent(document.createTextNode("No comments to display."))   
+        })
 }
+
+
+// content utils
+
+const addToDom = (text) => {
+    clearServerContent()
+    appendServerContent(text)
+}
+
+const {
+    clearContent: clearServerContent, 
+    appendContent: appendServerContent,
+    setContent: setServerContent
+} = contentManagementClosure("server-content")
+
+
+// user auth utils
+
+const {
+    clearContent: clearUserContent, 
+    appendContent: appendUserContent, 
+    setContent: setUserContent
+} = contentManagementClosure("user-content")
+
+const setLoggedInContent = (email) => {
+    setUserContent(`Yes, you're ${email}`)
+} 
+
+
+// user authentication
+
+let loginUrl, logoutUrl
+
+const getUser = () => {
+
+    getServerContent("/user")
+        .then(data => {
+            console.log(data)
+
+            // if logout url exists, user is logged in
+            if (data.logoutUrl !== undefined) {
+                setLoggedInContent(data.email);
+                logoutUrl = data.logoutUrl
+            }
+            // else if login url exists, user is not logged in
+            else if (data.loginUrl !== undefined) {
+                loginUrl = data.loginUrl
+                setUserContent("no, log in -->")
+            // uh oh
+            } else {
+                console.err(data)
+            }
+
+        })
+}
+
+const userLogin = () => location.href = loginUrl
+const userLogout = () => location.href = logoutUrl

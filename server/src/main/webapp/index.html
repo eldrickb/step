@@ -9,6 +9,12 @@
   <body>
     <div id="content">
         
+        <div>
+            <button onclick="getUser()">Am I Logged In?</button>
+            <span id="user-content">idk...</span>
+            <button onclick="userLogin()">Log me in</button>
+            <button onclick="userLogout()">Log me out</button>
+        </div>
         <h1>Comments</h1>
 
         <form action="/comments" method="POST" id="comments-form">
@@ -28,7 +34,10 @@ teach
             </select>
 
             <button onclick="addCommentsToDom()">Get Comments</button>
+
             <div id="server-content"></div>
+
+            <button onclick="deleteAllComments()">Delete All Comments</button>
         </div>
     </div>
   </body>

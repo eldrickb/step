@@ -56,8 +56,6 @@ public class CommentsServlet extends HttpServlet {
 
         for (Entity entity : results.asIterable()) {
 
-            System.out.println(gson.toJson(entity))
-
             if (queryCount == 0)
                 break;
                 
