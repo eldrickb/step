@@ -25,6 +25,7 @@ import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.sps.data.Comment;
 import com.google.sps.data.CommentBuilder;
+import com.google.appengine.api.datastore.FetchOptions;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,18 +47,22 @@ public class CommentsServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        int queryCount = Integer.parseInt(getParameter(request, "query-count", "-1"));
+
         Query query = new Query("Comment");
         PreparedQuery results = datastore.prepare(query);
+        Iterable<Entity> resultsList;
+
+        if (queryCount > -1) 
+            resultsList = results.asIterable(FetchOptions.Builder.withLimit(queryCount));
+        else
+            resultsList = results.asIterable();
 
         LinkedList<Comment> comments = new LinkedList<>();
 
         // check if # of comments are set
-        int queryCount = Integer.parseInt(getParameter(request, "query-count", "-1"));
-
-        for (Entity entity : results.asIterable()) {
-
-            if (queryCount == 0)
-                break;
+        for (Entity entity : resultsList) {
                 
             Comment newComment = new CommentBuilder()
                 .setId(entity.getKey().getId())
@@ -66,9 +71,6 @@ public class CommentsServlet extends HttpServlet {
                 .build();
             
             comments.add(newComment);
-
-            if (queryCount > 0)
-                queryCount--;
         }
 
         response.setContentType("application/json");

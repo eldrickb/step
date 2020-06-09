@@ -73,10 +73,7 @@ public class DeleteCommentServlet extends HttpServlet {
             long id = entity.getKey().getId();
 
             getQueryById(id);
-
-
         }
-
     }
 
     private void getQueryById (long id) {
