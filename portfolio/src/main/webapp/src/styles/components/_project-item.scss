@@ -1,0 +1,36 @@
+
+// project 
+
+.project {
+    display: flex;
+    padding-right: 2em;
+
+    min-width: 300px;
+
+    &:not(:last-child) {
+        margin-bottom: 2em;
+    }
+
+    .project__icon {
+        width: 2em;
+        margin-right: 1em;
+        height: auto;
+        
+        
+        img {
+            width: 100%;
+        }
+    }
+
+    .project__content {
+        flex: 1;
+    }
+
+    h4 {
+        margin-bottom: .5em;
+    }
+
+    p {
+        margin-bottom: .5em;
+    }
+}

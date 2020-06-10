@@ -1,12 +1,10 @@
 import '../styles/index.scss';
 
-console.log('webpack starterkit');
+// import HomePage from "./pages/home.js";
+// import PanelPage from "./pages/panel.js";
+
+// const serverUrl = "https://localhost:8080";
 
 
-var carousel = new Flickity(".carousel", {
-    prevNextButtons: false,
-    pageDots: false,
-    freeScroll: true,
-    contain: true,
-    draggable: true,
-});
+
+// new PanelPage();

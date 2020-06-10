@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>Feedback Panel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@700&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+
+        <!-- Fontawesome -->
+        <script src="https://kit.fontawesome.com/e6e1b9889b.js" crossorigin="anonymous"></script>
+
+      </head>
+
+    <body id="panel-page">
+
+        <div id="tools">
+            <button onClick="PanelPage.loadComments()">Load Comments</button>
+        </div>
+
+        <div id="panel">
+
+            <!-- Header -->
+            <div id="panel__heading">
+                Feedback
+            </div>
+            
+            <!-- Comments -->
+            <div id="panel__comments">
+                
+            </div>
+
+            <!-- Submit Comment -->
+            <form action="https://localhost:8080/comments" method="POST">
+
+                <input type="text" name="comment-author" placeholder="Author"/>
+                <input type="text" name="comment-content" placeholder="Comment"/>
+
+                <button type="submit">=></button>
+            </form>
+
+        </div>
+
+        <script src="./scripts/index.js"></script>
+    </body>
+</html>

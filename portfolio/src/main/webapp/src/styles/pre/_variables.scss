@@ -6,12 +6,17 @@ $font-size-body: 18px;
 $font-body: "Inter";
 $font-header: "El Messiri";
 
-$body-text-color: #5e5d72;
-$header-text-color: #4d8636;
-$color-encourage: #215eb9;
-$purple: #170d45;
+$green: #4d8636;
+$blue: #215eb9;
 $pink: #ed587d;
 $pink-light: #ff8aa7;
+$gray-light: #e0e4e9;
+$gray: #b1b9c3;
+
+$body-text-color: #5e5d72;
+$header-text-color: $green;
+$color-encourage: $blue;
+$purple: #170d45;
 
 $body-background-color: #eef3f5;
 

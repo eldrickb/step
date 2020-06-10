@@ -2,7 +2,7 @@
 @import "pre/normalize.css";
 @import 'pre/variables', 'pre/classes', "pre/global";
 
-@import "components";
+@import "components/feedback-panel", "components/button", "components/project-item", "components/carousel";
 
 @import 'sections/header', 'sections/footer', 'sections/work', 'sections/about';
 

@@ -23,9 +23,14 @@ module.exports = {
       { from: Path.resolve(__dirname, '../public'), to: 'public' },
       { from: Path.resolve(__dirname, '../WEB-INF'), to: 'WEB-INF' }
     ]),
+    // TODO: Move panel to a partial and use
+    new HtmlWebpackPlugin({
+        filename: "panel.html",
+      template: Path.resolve(__dirname, '../src/panel.html')
+    }),
     new HtmlWebpackPlugin({
       template: Path.resolve(__dirname, '../src/index.html')
-    })
+    }),
   ],
   resolve: {
     alias: {

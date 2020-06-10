@@ -46,6 +46,6 @@ p, h1, h2, h3, h4, h5 ,h6 {
 
 // default layout rules
 
-section {
+section:not(.no-default-section) {
     padding: 4em 0 4em 2/12*100vw;
 }
