@@ -20,8 +20,12 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.sps.data.Comment;
 import com.google.sps.data.CommentBuilder;
+import com.google.appengine.api.datastore.FetchOptions;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,12 +47,24 @@ public class CommentsServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        int queryCount = Integer.parseInt(getParameter(request, "query-count", "-1"));
+
         Query query = new Query("Comment");
         PreparedQuery results = datastore.prepare(query);
+        Iterable<Entity> resultsList;
+
+        if (queryCount > -1) {
+            resultsList = results.asIterable(FetchOptions.Builder.withLimit(queryCount));
+        } else {
+            resultsList = results.asIterable();
+        }
 
         LinkedList<Comment> comments = new LinkedList<>();
 
-        for (Entity entity : results.asIterable()) {
+        // check if # of comments are set
+        for (Entity entity : resultsList) {
+                
             Comment newComment = new CommentBuilder()
                 .setId(entity.getKey().getId())
                 .setAuthor((String) entity.getProperty("author"))
@@ -75,6 +91,23 @@ public class CommentsServlet extends HttpServlet {
         datastore.put(commentEntity);
 
         response.getWriter().println(gson.toJson(commentEntity));
+    }
+
+    @Override
+    public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String commentId = getParameter(request, "comment-id", "");
+
+        Filter keyFilter = new FilterPredicate("id", FilterOperator.EQUAL, commentId); 
+
+        Entity comment = datastore.prepare(new Query("Comment").setFilter(keyFilter)).asSingleEntity();
+
+        if (comment != null) {
+            datastore.delete(comment.getKey());
+        }
+
+        response.setStatus(200);
+        response.getWriter().println("Success");
     }
 
     /**

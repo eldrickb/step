@@ -12,48 +12,148 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+// TODO: reorganize and split into separate files once merged to Portfolio
+
+// general utils
+
 const getServerContent = (url) => {
     return fetch(url)
         .then((res) => res.json())
-        .catch(console.err)
-}
+        .catch(console.err);
+};
+
+const contentManagementClosure = (id) => {
+    // is a function until i learn how to await window.onLoad
+    const elem = document.getElementById(id);
+
+    const clearContent = () => {
+        elem.innerHTML = null;
+    };
+
+    const appendContent = (content) => {
+        if (typeof content === "string")
+            content = document.createTextNode(content);
+
+        elem.appendChild(content);
+    };
+
+    const setContent = (content) => {
+        clearContent();
+        appendContent(content);
+    };
+
+    return {
+        clearContent,
+        appendContent,
+        setContent,
+    };
+};
+
+// direct functions
 
 const addCommentsToDom = () => {
-
     // create DOM node for an individual comment
     const newCommentElement = (author, content) => {
-        const wrapper = document.createElement("div")
-        wrapper.classList.add("comment")
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("comment");
 
-        const authorNode = document.createElement("h6")
-        authorNode.appendChild(document.createTextNode(author))
+        const authorNode = document.createElement("h6");
+        authorNode.appendChild(document.createTextNode(author));
 
-        const contentNode = document.createElement("p")
-        contentNode.appendChild(document.createTextNode(content))
+        const contentNode = document.createElement("p");
+        contentNode.appendChild(document.createTextNode(content));
 
-        wrapper.appendChild(authorNode)
-        wrapper.appendChild(contentNode)
+        wrapper.appendChild(authorNode);
+        wrapper.appendChild(contentNode);
 
-        return wrapper
-    }
+        return wrapper;
+    };
 
     // create DOM nodes for each comment
     const parseComments = (json) => {
-
         let wrapper = document.createElement("div");
-    
-        json.forEach(comment => {
-            wrapper.appendChild(newCommentElement(comment.author, comment.content))
-        })
+
+        json.forEach((comment) => {
+            wrapper.appendChild(
+                newCommentElement(comment.author, comment.content)
+            );
+        });
 
         return wrapper;
-    }
+    };
 
-    getServerContent("/comments")
-        .then(parseComments)
-        .then(addToDom)
-} 
+    // query string
+    const fetchQuery = () => {
+        let queryString = "?";
+
+        // query count
+        const queryCountElem = document.getElementById("query-count");
+        const queryCountValue =
+            queryCountElem.options[queryCountElem.selectedIndex].value;
+
+        queryString += `query-count=${queryCountValue}`;
+
+        return getServerContent(`/comments${queryString}`);
+    };
+
+    fetchQuery().then(parseComments).then(addToDom);
+};
+
+const deleteAllComments = () => {
+    fetch("/comment/delete-all", { method: "POST" }).then(() => {
+        clearServerContent();
+        appendServerContent(document.createTextNode("No comments to display."));
+    });
+};
+
+// content utils
 
 const addToDom = (text) => {
-    document.getElementById("server-content").appendChild(text)
-}
+    clearServerContent();
+    appendServerContent(text);
+};
+
+const {
+    clearContent: clearServerContent,
+    appendContent: appendServerContent,
+    setContent: setServerContent,
+} = contentManagementClosure("server-content");
+
+// user auth utils
+
+const {
+    clearContent: clearUserContent,
+    appendContent: appendUserContent,
+    setContent: setUserContent,
+} = contentManagementClosure("user-content");
+
+const setLoggedInContent = (email) => {
+    setUserContent(`Yes, you're ${email}`);
+};
+
+// user authentication
+
+let loginUrl, logoutUrl;
+
+const getUser = () => {
+    getServerContent("/user")
+        .then((data) => {
+            console.log(data);
+
+            // if logout url exists, user is logged in
+            if (data.logoutUrl !== undefined) {
+                setLoggedInContent(data.email);
+                logoutUrl = data.logoutUrl;
+            }
+            // else if login url exists, user is not logged in
+            else if (data.loginUrl !== undefined) {
+                loginUrl = data.loginUrl;
+                setUserContent("no, log in -->");
+            }
+        })
+        .catch(console.err);
+};
+
+const userLogin = () => (location.href = loginUrl);
+const userLogout = () => (location.href = logoutUrl);

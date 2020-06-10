@@ -4,24 +4,41 @@
     <meta charset="UTF-8">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
   </head>
   <body>
     <div id="content">
         
+        <div>
+            <button onclick="getUser()">Am I Logged In?</button>
+            <span id="user-content">idk...</span>
+            <button onclick="userLogin()">Log me in</button>
+            <button onclick="userLogout()">Log me out</button>
+        </div>
         <h1>Comments</h1>
 
         <form action="/comments" method="POST" id="comments-form">
             <input type="text" name="comment-author" placeholder ="Author"/>
             <textarea name="comment-content" placeholder="Comment"></textarea>
+
             <button type="submit">Submit</button>
         </form>
 
         <div>
             <h3>See Comments</h3>
+            <h4>How many?</h4>
+            <select id="query-count">
+                <option value="-1">all</option>
+                <option value="2">2</option>
+            </select>
+
             <button onclick="addCommentsToDom()">Get Comments</button>
+
             <div id="server-content"></div>
+
+            <button onclick="deleteAllComments()">Delete All Comments</button>
         </div>
     </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
