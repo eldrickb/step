@@ -54,10 +54,11 @@ public class CommentsServlet extends HttpServlet {
         PreparedQuery results = datastore.prepare(query);
         Iterable<Entity> resultsList;
 
-        if (queryCount > -1) 
+        if (queryCount > -1) {
             resultsList = results.asIterable(FetchOptions.Builder.withLimit(queryCount));
-        else
+        } else {
             resultsList = results.asIterable();
+        }
 
         LinkedList<Comment> comments = new LinkedList<>();
 
@@ -101,8 +102,9 @@ public class CommentsServlet extends HttpServlet {
 
         Entity comment = datastore.prepare(new Query("Comment").setFilter(keyFilter)).asSingleEntity();
 
-        if (comment != null)
+        if (comment != null) {
             datastore.delete(comment.getKey());
+        }
 
         response.setStatus(200);
         response.getWriter().println("Success");

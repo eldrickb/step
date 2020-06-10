@@ -53,7 +53,6 @@ public class DeleteCommentServlet extends HttpServlet {
 
         Entity comment = datastore.prepare(new Query("Comment").setFilter(keyFilter)).asSingleEntity();
 
-        System.out.println(comment);
 
         if (comment != null)
             datastore.delete(comment.getKey());
@@ -80,11 +79,6 @@ public class DeleteCommentServlet extends HttpServlet {
         Filter keyFilter = new FilterPredicate("key.id", FilterOperator.EQUAL, id); 
 
         PreparedQuery comment = datastore.prepare(new Query("Comment").setFilter(keyFilter));
-
-        for (Entity entity:comment.asIterable()) {
-            System.out.println(gson.toJson(entity));
-        }
-
     }
 
     /**
