@@ -45,17 +45,23 @@ public class CommentsServlet extends HttpServlet {
     private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     private Gson gson = new Gson();
 
+    private void setAccessControlHeaders(HttpServletResponse resp) {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "GET, POST");
+    }
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        setAccessControlHeaders(response);
 
-        int queryCount = Integer.parseInt(getParameter(request, "query-count", "-1"));
+        int queryLimit = Integer.parseInt(getParameter(request, "limit", "-1"));
 
         Query query = new Query("Comment");
         PreparedQuery results = datastore.prepare(query);
         Iterable<Entity> resultsList;
 
-        if (queryCount > -1) 
-            resultsList = results.asIterable(FetchOptions.Builder.withLimit(queryCount));
+        if (queryLimit > -1) 
+            resultsList = results.asIterable(FetchOptions.Builder.withLimit(queryLimit));
         else
             resultsList = results.asIterable();
 
@@ -79,6 +85,8 @@ public class CommentsServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        setAccessControlHeaders(response);
+
         String commentContent = getParameter(request, "comment-content", "");
         String commentAuthor = getParameter(request, "comment-author", "");
 

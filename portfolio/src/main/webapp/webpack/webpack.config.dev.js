@@ -39,5 +39,9 @@ module.exports = merge(common, {
         use: ['style-loader', 'css-loader?sourceMap=true', 'sass-loader']
       }
     ]
-  }
+  },
+
+    optimization: {
+        minimize: false
+    },
 });

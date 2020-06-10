@@ -1,4 +1,4 @@
-// TODO: will be obsolete after integration
+// TODO: remove, will be obsolete after integration
 #panel-page {
     width: 60vw;
     height: 60vh;
@@ -23,69 +23,105 @@
             margin-right: 2em;
         }
     }
+
+    #panel {
+        height: 100%;
+        box-shadow: 0px 10px 69px -22px rgba(0,0,0,0.75);
+    }
 }
 
 #panel {
-
-    // TODO: will be obsolete after integration
-    height: 100%;
-    box-shadow: 0px 10px 69px -22px rgba(0,0,0,0.75);
-
-    //
 
     background: $body-background-color;
 
     display: flex;
     flex-direction: column;
 
-    #panel__comments {
-        flex-grow: 1;
-    }
-}
 
-
-#panel__heading {
-    background: $green;
-    color: white;
-
-    padding: .5em .8em;
-}
-
-#panel form {
-
-    $spacing: .6em;
-
-    display: flex;
-    padding: $spacing;
-
-    input, button {
-        border: none;
-
-        border-radius: 999px;
-
-        // remove input selection border (accessibility issues?)
-        outline: none !important;
-
-    }
-
-    input[type=text] {
-        flex-grow: 1;
-        padding: .8em 1.4em;
-        margin-right: $spacing;
-
-        color: $body-text-color;
-        background: $gray-light;
-
-        font-size: 16px;
-    }
-
-    button {
-        background: $pink;
+    #panel__heading {
+        background: $green;
         color: white;
 
-        width: 3em;
-        height: 3em;
+        padding: .5em 1.2em;
+    }
 
-        box-shadow: 0px 5px 12px -10px rgba(0,0,0,0.75);
+    #comments-wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 .8em;
+
+        overflow: scroll;
+
+        .comments-spacer {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            
+            button {
+                background: none;
+                padding: none;
+                margin: 0 auto;
+
+                font-family: inherit;
+                font-size: inherit;
+
+                padding: .4em .8em;
+                color: inherit;
+                border: 2px solid $gray;
+                border-radius: 999px;
+                opacity: .5;
+            }
+        }
+
+        #panel__comments {
+
+        }
+    }
+
+    form {
+
+        $spacing: .6em;
+
+        display: flex;
+        padding: $spacing;
+        margin-top: .8em;
+
+        input, button {
+            border: none;
+
+            border-radius: 999px;
+
+            // remove input selection border (accessibility issues?)
+            outline: none !important;
+
+        }
+
+        input {
+            -webkit-appearance: none;
+
+            flex-grow: 1;
+            padding: .8em 1.4em;
+            margin-right: $spacing;
+
+            color: $body-text-color;
+            background: $gray-light;
+
+            min-width: 0;
+
+            font-size: 16px;
+        }
+
+        button {
+            background: $pink;
+            color: white;
+
+            min-width: 3em;
+            height: 3em;
+
+            box-shadow: 0px 5px 12px -10px rgba(0,0,0,0.75);
+        }
     }
 }
+

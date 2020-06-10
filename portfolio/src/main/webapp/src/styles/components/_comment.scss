@@ -1,0 +1,21 @@
+.comment {
+
+
+    padding-top: .8em;
+
+    span {
+        display: block;
+        margin-left: 1.2em;
+    }
+
+    p {
+        display: inline-block;
+        padding: .4em 1.2em;
+        margin: 0;
+
+        background: white;
+        border-radius: 999px;
+
+        box-shadow: 0px 10px 36px -12px rgba(0,0,0,0.15);
+    }
+}

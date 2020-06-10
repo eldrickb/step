@@ -1,8 +1,5 @@
-
-
-export default (id) => {
+const manageContent = (id) => {
     const elem = document.getElementById(id);
-
     const clearContent = () => {
         elem.innerHTML = null;
     };
@@ -20,8 +17,10 @@ export default (id) => {
     };
 
     return {
-        clearContent,
-        appendContent,
-        setContent,
+        clear: clearContent,
+        append: appendContent,
+        set: setContent,
     };
 };
+
+export default manageContent

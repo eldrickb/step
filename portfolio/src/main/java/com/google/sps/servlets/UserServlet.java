@@ -50,5 +50,4 @@ public class UserServlet extends HttpServlet {
             response.getWriter().println(gson.toJson(jsonResp));
         }
     }
-
 }
