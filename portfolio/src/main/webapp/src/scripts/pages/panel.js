@@ -34,21 +34,14 @@ class PanelPage {
     }
 
     loadComments(limit = -1) {
-        // this.commentContent.set(generateComments(
-        // [{"author":"undefined","content":"SHE WORKS!!!!","id":4644337115725824},{"author":"frank ocean","content":"im not dropping till 2040","id":4785074604081152},{"author":"yee","content":"yee yee yee","id":5066549580791808},{"author":"sdfsd","content":"dsfsdfdf","id":5629499534213120},{"author":"zxjckjzxkjczklxc","content":"comment 45","id":6192449487634432},{"author":"undefined","content":"WHEN WILL THIS WORK??\u003e??","id":6473924464345088}]
-        // ))
 
         api.getJson(`/comments?limit=${limit}`).then((json) => {
-            this.commentContent.set(generateComments(json));
+            this.commentContent.set(generateComments(json))
         });
     }
 
     loadUser() {
-        // this.userContent.set(
-        //     generateUser(
-        //         {"loginUrl":"/_ah/login?continue\u003d%2F","isLoggedIn": false}
-        //     )
-        // )
+        
         api.getJson("/user").then((json) => {
             this.user = json;
             this.userContent.set(generateUser(json));
