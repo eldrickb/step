@@ -2,6 +2,7 @@ const Path = require('path');
 const Webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
+const prettier = require("prettier");
 
 module.exports = merge(common, {
   mode: 'development',
@@ -26,7 +27,9 @@ module.exports = merge(common, {
         enforce: 'pre',
         loader: 'eslint-loader',
         options: {
-          emitWarning: true
+          emitWarning: true,
+          formatter: prettier,
+          fix: true
         }
       },
       {

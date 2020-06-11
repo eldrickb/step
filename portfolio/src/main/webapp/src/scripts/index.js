@@ -6,8 +6,7 @@ import UrlParser from "./utils/urlParser.js"
 
 
 
-// if (urlParser.match("root"))
-    // const homeScript = new HomePage();
-
-// else if (urlParser.match(`panel`))
-    const panelScript = new PanelPage();
+if (document.querySelector("body").id === "panel-page")
+    new PanelPage();
+else 
+    new HomePage();
