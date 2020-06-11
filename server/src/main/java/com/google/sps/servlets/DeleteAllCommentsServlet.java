@@ -30,16 +30,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
 import com.google.gson.Gson;
 
 /** 
 * Servlet that handles the  "/comments" endpoint 
-* @deprecated not finished yet
 */
-@WebServlet("/comment/delete")
-@Deprecated
-public class DeleteCommentServlet extends HttpServlet {
+@WebServlet("/comment/delete-all")
+public class DeleteAllCommentsServlet extends HttpServlet {
 
     private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     private Gson gson = new Gson();
@@ -47,45 +44,13 @@ public class DeleteCommentServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String commentId = getParameter(request, "comment-id", "");
+        PreparedQuery results = datastore.prepare(new Query("Comment"));
 
-        Filter keyFilter = new FilterPredicate("id", FilterOperator.EQUAL, commentId); 
-
-        Entity comment = datastore.prepare(new Query("Comment").setFilter(keyFilter)).asSingleEntity();
-
-
-        if (comment != null)
-            datastore.delete(comment.getKey());
+        for (Entity entity : results.asIterable()) {
+            datastore.delete(entity.getKey());
+        }
 
         response.setStatus(200);
         response.getWriter().println("Success");
-    }
-
-    @Override 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
-        Query query = new Query("Comment");
-        PreparedQuery results = datastore.prepare(query);
-
-        for (Entity entity : results.asIterable()) {
-
-            long id = entity.getKey().getId();
-
-            getQueryById(id);
-        }
-    }
-
-    private void getQueryById (long id) {
-        Filter keyFilter = new FilterPredicate("key.id", FilterOperator.EQUAL, id); 
-
-        PreparedQuery comment = datastore.prepare(new Query("Comment").setFilter(keyFilter));
-    }
-
-    /**
-    * @return the request parameter, or the default value if the parameter
-    *         was not specified by the client
-    */
-    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-        return Optional.ofNullable(request.getParameter(name)).orElse(defaultValue);
     }
 }

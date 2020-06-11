@@ -40,17 +40,15 @@ public class UserServlet extends HttpServlet {
             User currUser = userService.getCurrentUser();
 
             jsonResp.addProperty("email", currUser.getEmail());
-            jsonResp.addProperty("logoutUrl", userService.createLogoutURL("/panel.html"));
-            jsonResp.addProperty("isLoggedIn", true);
+            jsonResp.addProperty("logoutUrl", userService.createLogoutURL("/"));
 
+            response.getWriter().println(gson.toJson(jsonResp));
         } else {
 
-            jsonResp.addProperty("loginUrl", userService.createLoginURL("/panel.html"));
-            jsonResp.addProperty("isLoggedIn", false);
+            jsonResp.addProperty("loginUrl", userService.createLoginURL("/"));
+
+            response.getWriter().println(gson.toJson(jsonResp));
         }
-
-
-        response.getWriter().println(gson.toJson(jsonResp));
     }
 
 }

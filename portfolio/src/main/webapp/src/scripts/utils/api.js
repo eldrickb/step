@@ -1,7 +1,7 @@
 class Api {
 
     constructor() {
-        this.apiUrl =  "http://localhost:8080" 
+        this.apiUrl = "" 
     }
 
     getJson(address) {
