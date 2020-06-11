@@ -37,12 +37,18 @@
     display: flex;
     flex-direction: column;
 
-
     #panel__heading {
         background: $green;
         color: white;
 
-        padding: .5em 1.2em;
+        display: flex;
+
+        padding: 1em 1.2em .8em;
+
+        > span {
+            flex: 1;
+            font-weight: 700;
+        }
     }
 
     #comments-wrapper {
@@ -51,13 +57,17 @@
         flex-direction: column;
         justify-content: flex-end;
         padding: 0 .8em;
+        overflow: hidden;
 
-        overflow: scroll;
+        #comments__scroll-wrapper {
+            overflow-y: scroll;
+        }
 
         .comments-spacer {
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            padding: 4em 0 2em;
             
             button {
                 background: none;
@@ -74,10 +84,6 @@
                 opacity: .5;
             }
         }
-
-        #panel__comments {
-
-        }
     }
 
     form {
@@ -86,19 +92,15 @@
 
         display: flex;
         padding: $spacing;
-        margin-top: .8em;
+        padding-top: .8em;
+        border-top: 1px solid $gray-light;
 
-        input, button {
+        input, textarea, button {
             border: none;
-
-            border-radius: 999px;
-
-            // remove input selection border (accessibility issues?)
-            outline: none !important;
 
         }
 
-        input {
+        input, textarea {
             -webkit-appearance: none;
 
             flex-grow: 1;
@@ -113,7 +115,14 @@
             font-size: 16px;
         }
 
+        textarea {
+            resize: none;
+            line-height: inherit;
+            border-radius: 35px;
+        }
+
         button {
+            border-radius: 999px;
             background: $pink;
             color: white;
 

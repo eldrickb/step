@@ -23,22 +23,25 @@
 
             <!-- Header -->
             <div id="panel__heading">
-                Feedback
+                <span>Feedback</span>
+
+                <div id="panel__user">
+                </div>
             </div>
             
             <!-- Comments -->
             <div id="comments-wrapper">
-                <div class="comments-spacer">
-                    <button id="panel__load-all-comments">Load more...</button>
+                <div id="comments__scroll-wrapper">
+                    <div class="comments-spacer">
+                        <button id="panel__load-all-comments">Load more...</button>
+                    </div>
+                    <div id="panel__comments"></div>
                 </div>
-                <div id="panel__comments"></div>
             </div>
 
             <!-- Submit Comment -->
-            <form action="https://localhost:8080/comments" method="POST">
-
-                <input type="text" name="comment-author" placeholder="Author"/>
-                <input type="text" name="comment-content" placeholder="Comment"/>
+            <form>
+                <textarea type="text" name="content" rows="2" placeholder="Comment"></textarea>
 
                 <button type="submit">=></button>
             </form>

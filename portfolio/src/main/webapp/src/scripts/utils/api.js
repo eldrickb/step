@@ -10,8 +10,9 @@ class Api {
             .catch(console.err);
     }
 
-    postJson(address) {
-        return fetch(this.makeUrl(address), { method: POST })
+    postJson(address, options = {}) {
+        options.method = "POST"
+        return fetch(this.makeUrl(address), options)
             .then((res) => res.json())
             .catch(console.err)
     }
