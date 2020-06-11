@@ -5,7 +5,6 @@
     margin: 15vh auto;
 
     #tools {
-
         margin-bottom: 12px;
         display: flex;
 
@@ -13,9 +12,9 @@
             display: block;
             background: $gray;
             border-radius: 999px;
-            border:none;
+            border: none;
             color: white;
-            padding: .8em 1em;;
+            padding: 0.8em 1em;
 
             font-size: 16px;
             font-weight: 400;
@@ -26,12 +25,11 @@
 
     #panel {
         height: 100%;
-        box-shadow: 0px 10px 69px -22px rgba(0,0,0,0.75);
+        box-shadow: 0px 10px 69px -22px rgba(0, 0, 0, 0.75);
     }
 }
 
 #panel {
-
     background: $body-background-color;
 
     display: flex;
@@ -43,7 +41,7 @@
 
         display: flex;
 
-        padding: 1em 1.2em .8em;
+        padding: 1em 1.2em 0.8em;
 
         > span {
             flex: 1;
@@ -56,7 +54,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        padding: 0 .8em;
+        padding: 0 0.8em;
         overflow: hidden;
 
         #comments__scroll-wrapper {
@@ -68,7 +66,7 @@
             flex-direction: column;
             justify-content: flex-end;
             padding: 4em 0 2em;
-            
+
             button {
                 background: none;
                 padding: none;
@@ -77,35 +75,35 @@
                 font-family: inherit;
                 font-size: inherit;
 
-                padding: .4em .8em;
+                padding: 0.4em 0.8em;
                 color: inherit;
                 border: 2px solid $gray;
                 border-radius: 999px;
-                opacity: .5;
-
+                opacity: 0.5;
             }
         }
     }
 
     form {
-
-        $spacing: .6em;
+        $spacing: 0.6em;
 
         display: flex;
         padding: $spacing;
-        padding-top: .8em;
+        padding-top: 0.8em;
         border-top: 1px solid $gray-light;
 
-        input, textarea, button {
+        input,
+        textarea,
+        button {
             border: none;
-
         }
 
-        input, textarea {
+        input,
+        textarea {
             -webkit-appearance: none;
 
             flex-grow: 1;
-            padding: .8em 1.4em;
+            padding: 0.8em 1.4em;
             margin-right: $spacing;
 
             color: $body-text-color;
@@ -131,12 +129,12 @@
             height: 3em;
 
             transition: background 200ms ease;
-            box-shadow: 0px 5px 12px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 5px 12px -10px rgba(0, 0, 0, 0.75);
 
             &:hover {
                 background: $pink-dark;
             }
-            
+
             i {
                 position: relative;
                 margin-left: -3px;
@@ -145,4 +143,3 @@
         }
     }
 }
-

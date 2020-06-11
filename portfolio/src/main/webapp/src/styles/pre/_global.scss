@@ -1,10 +1,11 @@
 html {
-box-sizing: border-box;
+    box-sizing: border-box;
 }
-*, *::before, *::after {
-box-sizing: inherit;
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
 }
-
 
 // global styling
 
@@ -12,7 +13,7 @@ body {
     color: $body-text-color;
     background: $body-background-color;
 }
-  
+
 // typography
 
 body {
@@ -21,42 +22,52 @@ body {
     line-height: 1.8;
 }
 
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 700;
 }
 
-h1, h2 {
+h1,
+h2 {
     font-family: $font-header, serif;
     color: $header-text-color;
 }
 
 h2 {
     font-size: 2.5rem;
-    margin-bottom: .2em;
+    margin-bottom: 0.2em;
 }
 
 h3 {
     font-size: 2rem;
 }
 
-p, h1, h2, h3, h4, h5 ,h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-top: 0;
 }
 
 // default layout rules
 
 section:not(.no-default-section) {
-    padding: 4em 0 4em 2/12*100vw;
+    padding: 4em 0 4em 2/12 * 100vw;
 }
 
 a {
-
     color: inherit;
     text-decoration: none;
 
     &:hover {
-        cursor: pointer;        
+        cursor: pointer;
     }
 
     &:visited {
@@ -64,18 +75,19 @@ a {
     }
 
     &:not(.no-default-link-style) {
-
         will-change: opacity;
         transition: 200ms ease opacity;
         color: $blue;
 
         &:hover {
-            opacity: .6;
+            opacity: 0.6;
         }
     }
 }
 
-input, button, textarea {
+input,
+button,
+textarea {
     // remove input selection border (accessibility issues?)
     outline: none !important;
 }

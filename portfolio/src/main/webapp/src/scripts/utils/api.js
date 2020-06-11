@@ -1,7 +1,6 @@
 class Api {
-
     constructor() {
-        this.apiUrl = "" 
+        this.apiUrl = "";
     }
 
     getJson(address) {
@@ -11,14 +10,14 @@ class Api {
     }
 
     postJson(address, options = {}) {
-        options.method = "POST"
+        options.method = "POST";
         return fetch(this.makeUrl(address), options)
             .then((res) => res.json())
-            .catch(console.err)
+            .catch(console.err);
     }
 
     makeUrl(address) {
-        return `${this.apiUrl}${address}`
+        return `${this.apiUrl}${address}`;
     }
 }
 

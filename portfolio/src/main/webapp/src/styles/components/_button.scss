@@ -1,10 +1,9 @@
-.button, 
+.button,
 button {
-
     display: block;
 
     font-weight: bold;
-    
+
     @extend .no-link-style;
 
     // states
@@ -14,40 +13,38 @@ button {
 
     // multi-button margin
     &:not(:last-child) {
-        margin-right: .4em;
+        margin-right: 0.4em;
     }
-    
+
     // variations
 
     &.button--link {
+        padding: 0.65em 1.2em 0.65em 1em;
 
-        padding: .65em 1.2em .65em 1em;;
-
-        background: rgba(black, .05);
+        background: rgba(black, 0.05);
         border-radius: 999px;
         transition: background 200ms ease;
 
         i {
-            font-size: .9em;
+            font-size: 0.9em;
             margin-right: 5px;
-            opacity: .8;
+            opacity: 0.8;
         }
 
         &:hover {
-            background: rgba(black, .1);
+            background: rgba(black, 0.1);
             color: $color-encourage;
         }
     }
 
     &.button--attachment {
-        
         display: inline-flex;
         align-items: center;
 
         padding: 12px 15px;
-        filter: opacity(.9);
-        font-size: .9em;
-        border: 1px solid rgba(white,.4);
+        filter: opacity(0.9);
+        font-size: 0.9em;
+        border: 1px solid rgba(white, 0.4);
         border-radius: 8px;
 
         transition: 200ms ease;
@@ -55,32 +52,31 @@ button {
 
         i {
             margin-right: 10px;
-            font-size: .75em;
+            font-size: 0.75em;
         }
         span {
             margin-right: 2px;
         }
 
         &:hover {
-            border-color: rgba(black, .7);
-            background: rgba(black, .05);
+            border-color: rgba(black, 0.7);
+            background: rgba(black, 0.05);
         }
     }
 
     &.button--ghost {
-
         transition: opacity 200ms ease;
         color: $color-encourage;
 
         &:hover {
             color: $body-text-color;
-            opacity: .6;
+            opacity: 0.6;
         }
     }
 
     &.button--full {
         display: inline-block;
-        padding: .8em 1em;
+        padding: 0.8em 1em;
         background: white;
 
         border-radius: 3px;

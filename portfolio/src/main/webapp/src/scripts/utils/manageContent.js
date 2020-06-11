@@ -23,4 +23,4 @@ const manageContent = (id) => {
     };
 };
 
-export default manageContent
+export default manageContent;

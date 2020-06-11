@@ -1,9 +1,7 @@
-const Flickity = require("flickity")
+const Flickity = require("flickity");
 
 class HomePage {
-
     constructor() {
-
         const carousel = new Flickity(".carousel", {
             prevNextButtons: false,
             pageDots: false,
@@ -18,4 +16,4 @@ class HomePage {
     }
 }
 
-export default HomePage
+export default HomePage;
