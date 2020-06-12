@@ -52,10 +52,12 @@ public class CommentsServlet extends HttpServlet {
 
         Query query = new Query("Comment");
         PreparedQuery results = datastore.prepare(query);
-        Iterable<Entity> resultsList = results.asIterable();
+        Iterable<Entity> resultsList;
 
         if (queryCount > -1) {
             resultsList = results.asIterable(FetchOptions.Builder.withLimit(queryCount));
+        } else {
+            resultsList = results.asIterable();
         }
 
         LinkedList<Comment> comments = new LinkedList<>();

@@ -15,7 +15,7 @@ const makeComment = (author, content) => {
 };
 
 const generateComments = (json) => {
-    let wrapper = document.createElement("div");
+    const wrapper = document.createElement("div");
     wrapper.classList.add("comments");
 
     json.forEach((comment) => {

@@ -29,4 +29,4 @@ const generateUser = (json) => {
     return wrapper;
 };
 
-export default generateUser;
+export { generateUser };

@@ -5,10 +5,16 @@ const manageContent = (id) => {
     };
 
     const appendContent = (content) => {
-        if (typeof content === "string")
-            content = document.createTextNode(content);
 
-        elem.appendChild(content);
+        let contentNode;
+
+        if (typeof content === "string" || typeof content === "number") {
+            contentNode = document.createTextNode(content);
+        } else {
+            contentNode = content;
+        } 
+
+        elem.appendChild(contentNode);
     };
 
     const setContent = (content) => {
@@ -23,4 +29,4 @@ const manageContent = (id) => {
     };
 };
 
-export default manageContent;
+export { manageContent };

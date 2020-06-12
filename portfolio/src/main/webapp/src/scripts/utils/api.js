@@ -21,4 +21,6 @@ class Api {
     }
 }
 
-export default Api;
+const apiSingleton = new Api();
+
+export { apiSingleton as api };

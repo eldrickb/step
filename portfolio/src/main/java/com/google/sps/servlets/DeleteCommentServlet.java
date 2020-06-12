@@ -34,11 +34,10 @@ import java.util.Optional;
 import com.google.gson.Gson;
 
 /** 
-* Servlet that handles the  "/comments" endpoint 
-* @deprecated not finished yet
+* Servlet that deletes a comment by key/ID.
+* TODO: make this work
 */
 @WebServlet("/comment/delete")
-@Deprecated
 public class DeleteCommentServlet extends HttpServlet {
 
     private DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -53,26 +52,11 @@ public class DeleteCommentServlet extends HttpServlet {
 
         Entity comment = datastore.prepare(new Query("Comment").setFilter(keyFilter)).asSingleEntity();
 
-
-        if (comment != null)
+        if (!Optional.of(comment).isPresent())
             datastore.delete(comment.getKey());
 
         response.setStatus(200);
         response.getWriter().println("Success");
-    }
-
-    @Override 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
-        Query query = new Query("Comment");
-        PreparedQuery results = datastore.prepare(query);
-
-        for (Entity entity : results.asIterable()) {
-
-            long id = entity.getKey().getId();
-
-            getQueryById(id);
-        }
     }
 
     private void getQueryById (long id) {
