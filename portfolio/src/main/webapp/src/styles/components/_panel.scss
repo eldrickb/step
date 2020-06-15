@@ -8,17 +8,17 @@
         margin-bottom: 12px;
         display: flex;
 
-        a, button {
+        a,
+        button {
             margin-right: 1em;
         }
 
         a {
-            margin-top: .3em;
+            margin-top: 0.3em;
         }
 
-        // TODO: centralize button styles 
+        // TODO: centralize button styles
         button {
-
             padding: 0.8em 1em;
 
             display: block;
@@ -29,7 +29,6 @@
 
             font-size: 16px;
             font-weight: 400;
-
         }
     }
 
@@ -134,7 +133,7 @@
             border-radius: 35px;
         }
 
-        // TODO: centralize button styles 
+        // TODO: centralize button styles
         button {
             border-radius: 999px;
             background: $pink;

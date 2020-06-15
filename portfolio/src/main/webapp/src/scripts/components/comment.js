@@ -1,11 +1,11 @@
 const makeComment = (author, content) => {
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("comment");
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('comment');
 
-    const authorNode = document.createElement("span");
+    const authorNode = document.createElement('span');
     authorNode.appendChild(document.createTextNode(author));
 
-    const contentNode = document.createElement("p");
+    const contentNode = document.createElement('p');
     contentNode.appendChild(document.createTextNode(content));
 
     wrapper.appendChild(authorNode);
@@ -15,8 +15,8 @@ const makeComment = (author, content) => {
 };
 
 const generateComments = (json) => {
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("comments");
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('comments');
 
     json.forEach((comment) => {
         wrapper.appendChild(makeComment(comment.author, comment.content));

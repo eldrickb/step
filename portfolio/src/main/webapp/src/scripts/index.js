@@ -1,10 +1,10 @@
-import "../styles/index.scss";
+import '../styles/index.scss';
 
-import { HomePage } from "./pages/home.js";
-import { PanelPage } from "./pages/panel.js";
+import { HomePage } from './pages/home.js';
+import { PanelPage } from './pages/panel.js';
 
-if (document.querySelector("body").id === "panel-page") {
+if (document.querySelector('body').id === 'panel-page') {
     new PanelPage();
-} else  {
+} else {
     new HomePage();
 }

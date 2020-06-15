@@ -1,10 +1,9 @@
-@import "pre/normalize.css";
-@import "pre/variables", "pre/classes", "pre/global";
+@import 'pre/normalize.css';
+@import 'pre/variables', 'pre/classes', 'pre/global';
 
-@import "components/panel", "components/button",
-    "components/project-item", "components/carousel", "components/comment",
-    "components/user";
+@import 'components/panel', 'components/button', 'components/project-item',
+    'components/carousel', 'components/comment', 'components/user';
 
-@import "sections/header", "sections/footer", "sections/work", "sections/about";
+@import 'sections/header', 'sections/footer', 'sections/work', 'sections/about';
 
-@import "misc";
+@import 'misc';

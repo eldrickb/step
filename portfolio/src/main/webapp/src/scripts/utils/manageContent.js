@@ -5,14 +5,13 @@ const manageContent = (id) => {
     };
 
     const appendContent = (content) => {
-
         let contentNode;
 
-        if (typeof content === "string" || typeof content === "number") {
+        if (typeof content === 'string' || typeof content === 'number') {
             contentNode = document.createTextNode(content);
         } else {
             contentNode = content;
-        } 
+        }
 
         elem.appendChild(contentNode);
     };
