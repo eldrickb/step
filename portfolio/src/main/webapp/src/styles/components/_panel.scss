@@ -105,6 +105,10 @@
         padding-top: 0.8em;
         border-top: 1px solid $gray-light;
 
+        > *:not(:last-child) {
+            margin-right: $spacing;
+        }
+
         input,
         textarea,
         button {
@@ -117,7 +121,6 @@
 
             flex-grow: 1;
             padding: 0.8em 1.4em;
-            margin-right: $spacing;
 
             color: $body-text-color;
             background: $gray-light;
@@ -134,25 +137,57 @@
         }
 
         // TODO: centralize button styles
+
         button {
             border-radius: 999px;
-            background: $pink;
-            color: white;
 
             min-width: 3em;
             height: 3em;
 
             transition: background 200ms ease;
-            box-shadow: 0px 5px 12px -10px rgba(0, 0, 0, 0.75);
 
-            &:hover {
-                background: $pink-dark;
+            // file button
+            &[type='button'] {
+                height: auto;
+                display: flex;
+                flex-directon: column;
+
+                background: $gray-light;
+                padding: 1em 1em;
+                color: $body-text-color;
+                font-weight: 400;
+
+                &:hover {
+                    background: $gray-medlight;
+                }
+
+                span {
+                    display: block;
+                    font-size: 0.8em;
+                    min-width: 0px;
+
+                    &.hasContent {
+                        padding-right: 0.4em;
+                    }
+                }
             }
 
-            i {
-                position: relative;
-                margin-left: -3px;
-                margin-top: 2px;
+            // send button
+            &[type='submit'] {
+                background: $pink;
+                color: white;
+
+                box-shadow: 0px 5px 12px -10px rgba(0, 0, 0, 0.75);
+
+                &:hover {
+                    background: $pink-dark;
+                }
+
+                i {
+                    position: relative;
+                    margin-left: -3px;
+                    margin-top: 2px;
+                }
             }
         }
     }

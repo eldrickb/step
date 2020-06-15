@@ -22,6 +22,8 @@ class PanelPage {
                 this.handleForm(e);
             });
 
+        this.handleFileButtons();
+
         // create contentManager
         this.commentContent = manageContent('panel__comments');
         this.userContent = manageContent('panel__user');
@@ -57,14 +59,63 @@ class PanelPage {
 
         const form = event.target;
 
-        const requestBody = {
-            author: this.user.email,
-            content: form.querySelector('[name=content]').value,
-        };
+        // attach file, if there is one
+        const file = document.getElementById('form__real-file-button').files[0];
+        const hasFile = file !== undefined;
 
-        api.postJson(
-            `/comments?author=${requestBody.author}&content=${requestBody.content}`
-        ).then(() => this.loadComments());
+        const requestParams = `?
+                author=${this.user.email}&
+                content=${form.querySelector('[name=content]').value}&
+                hasImage=${hasFile}
+            `;
+
+        if (hasFile) {
+            api.getJson('/file').then((json) => {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                api.postJson(json.uploadUrl + requestParams, { body: formData })
+                    .then(this.loadComments())
+                    .catch(console.err);
+            });
+        } else {
+            api.postJson('/comments' + requestParams)
+                .then(() => this.loadComments())
+                .catch(console.err);
+        }
+    }
+
+    handleFileButtons() {
+        const fakeFileButton = document.getElementById(
+            'form__fake-file-button'
+        );
+        const realFileButton = document.getElementById(
+            'form__real-file-button'
+        );
+        const fileText = document.querySelector('#file-buttons span');
+
+        // imitate real file button onclick
+        fakeFileButton.addEventListener('click', (e) => {
+            realFileButton.click();
+        });
+
+        // update file name text
+        realFileButton.addEventListener('change', function () {
+            if (realFileButton.value) {
+                let filename = realFileButton.value.match(
+                    /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                )[1];
+
+                if (filename.length > 23) {
+                    filename = filename.substr(0, 20) + '...';
+                }
+
+                fileText.innerHTML = filename;
+                fileText.classList.add('hasContent');
+            } else {
+                fileText.innerHTML = null;
+            }
+        });
     }
 }
 
