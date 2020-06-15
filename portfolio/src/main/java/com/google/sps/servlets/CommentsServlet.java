@@ -114,7 +114,9 @@ public class CommentsServlet extends HttpServlet {
 
         // check for file
         if (hasImage) {
-            commentEntity.setProperty("image", getUploadedFileUrl(request, "image"));
+            String fileUrl = getUploadedFileUrl(request, "image");
+            System.out.println("this has an image! it is " + fileUrl);
+            commentEntity.setProperty("image", fileUrl);
         }
 
         // place comment in datstore

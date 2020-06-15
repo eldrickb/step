@@ -39,6 +39,15 @@ class PanelPage {
         api.getJson(`/comments?limit=${limit}`).then((json) => {
             this.commentContent.set(generateComments(json));
         });
+
+        // scroll to bottom
+        const container = document.getElementById("comments-wrapper")
+        container.scrollTop = container.scrollHeight;
+
+        // change language of button to indicate all are loaded
+        if (limit === -1) {
+            document.getElementById("panel__load-all-comments").innerHTML = "Reload Comments"
+        }
     }
 
     loadUser() {
@@ -70,7 +79,11 @@ class PanelPage {
                 const formData = new FormData();
                 formData.append('image', file);
 
-                api.postJson(json.uploadUrl + requestParams, { body: formData })
+                // cloudshell hotfix to avoid making request to wrong localhost
+                // TODO: make this unnecessary
+                const url = json.uploadUrl.replace( /^[a-zA-Z]{3,5}\:\/{2}[a-zA-Z0-9_.:-]+\//, '')
+
+                api.postJson(url + requestParams, { body: formData })
                     .then(this.loadComments())
                     .catch(console.err);
             });
