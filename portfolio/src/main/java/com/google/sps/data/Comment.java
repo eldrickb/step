@@ -9,9 +9,24 @@ public final class Comment {
     private final String author;
     private final String content;
     private final long id;
+    private final String img;
 
     /**
     * Full constructor of all properties of the comment.
+    * @param id the id of the comment.
+    * @param author the author of the comment.
+    * @param content the content of the comment.
+    * @param img the image of the comment.
+    */
+    public Comment (long id, String author, String content, String img) {
+        this.id = id;
+        this.author = author;
+        this.content = content;
+        this.img = img;
+    }
+
+    /**
+    * Constructor without image.
     * @param id the id of the comment.
     * @param author the author of the comment.
     * @param content the content of the comment.
@@ -20,8 +35,9 @@ public final class Comment {
         this.id = id;
         this.author = author;
         this.content = content;
+        this.img = null;
     }
-
+    
     /**
     * Gets the author of the comment.
     * @return the author of the comment.
@@ -44,5 +60,13 @@ public final class Comment {
     */
     public long getId() {
         return id;
+    }
+
+    /**
+    * Gets the image of the comment.
+    * @return the image of the comment.
+    */
+    public String getImg() {
+        return img;
     }
 }

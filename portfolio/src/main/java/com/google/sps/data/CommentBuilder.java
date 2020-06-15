@@ -9,14 +9,16 @@ public final class CommentBuilder {
     private String author;
     private String content;
     private long id;
+    private String img;
 
     /**
     * Directly adds all parameters to the builder.
     * @param id the id of the comment.
     * @param author the author of the comment.
     * @param content the content of the comment.
+    * @param img the img of the comment (if it has one).
     */
-    public CommentBuilder (long id, String author, String content) {
+    public CommentBuilder (long id, String author, String content, String img) {
         this.author = author;
         this.content = content;
         this.id = id;
@@ -59,10 +61,27 @@ public final class CommentBuilder {
 
 
     /**
+    * Sets the imagea of the builder.
+    * @param img the image of the comment.
+    */
+    public CommentBuilder setImg(String img) {
+        if (img != null && img.length() > 0) {
+            this.img = img;
+        }
+        return this;
+    }
+
+
+    /**
     * Builds the comment instance.
     * @returns a new Comment instance with the properties set.
     */
     public Comment build () {
-        return new Comment(id, author, content);
+        if (this.img != null) {
+            return new Comment(id, author, content, img);
+        } else {
+            return new Comment(id, author, content);
+        }
+
     }
 }
