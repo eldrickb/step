@@ -63,16 +63,12 @@ class PanelPage {
         const file = document.getElementById('form__real-file-button').files[0];
         const hasFile = file !== undefined;
 
-        const requestParams = `?
-                author=${this.user.email}&
-                content=${form.querySelector('[name=content]').value}&
-                hasImage=${hasFile}
-            `;
+        const requestParams = `?author=${this.user.email}&content=${form.querySelector('[name=content]').value}&hasImage=${hasFile}`;
 
         if (hasFile) {
             api.getJson('/file').then((json) => {
                 const formData = new FormData();
-                formData.append('file', file);
+                formData.append('image', file);
 
                 api.postJson(json.uploadUrl + requestParams, { body: formData })
                     .then(this.loadComments())
